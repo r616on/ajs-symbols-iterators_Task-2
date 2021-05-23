@@ -7,7 +7,7 @@ export default class Team {
     if (!this.members.has(obj)) {
       this.members.add(obj);
     } else {
-      throw new Error("Персонаж уже есть в комманде");
+      throw new Error('Персонаж уже есть в комманде');
     }
   }
 
@@ -22,28 +22,10 @@ export default class Team {
     return arr;
   }
 
-  [Symbol.iterator]() {
-    const entries = this.toArray();
-    let index = 0;
-    return {
-      next() {
-        const result = {
-          value: entries[index],
-          done: index >= entries.length,
-        };
-        index += 1;
-        return result;
-      },
-    };
-  }
-
-  *[Symbol.iterator]() {
+  * [Symbol.iterator]() {
     const members = Array.from(this.members);
     for (let i = 0; i < members.length; i += 1) {
       yield members[i];
     }
-    // это генератор
-    // и здесь есть доступ к this
-    // остаётся лишь правильно написать yield
   }
 }
